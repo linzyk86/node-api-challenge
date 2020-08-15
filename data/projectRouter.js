@@ -6,7 +6,7 @@ const action = require("./helpers/actionModel")
 
 
 //works
-router.get('/projects', (req, res) => {
+router.get('/', (req, res) => {
   project.get()
     .then((action) => {
       res.status(200).json(action)
@@ -16,7 +16,8 @@ router.get('/projects', (req, res) => {
     })
 });
 
-router.get('/projects/:id', (req, res) => {
+//works
+router.get('/:id/actions', (req, res) => {
   project.getProjectActions(req.params.id)
     .then((actions) => {
       res.status(200).json(actions)
@@ -31,7 +32,7 @@ router.get('/projects/:id', (req, res) => {
 })
 
 //works
-router.post('/projects', (req, res) => {
+router.post('/', (req, res) => {
   project.insert(req.body)
 
     .then((newProject) => {
@@ -45,22 +46,22 @@ router.post('/projects', (req, res) => {
 })
 
 //works
-router.delete('/projects/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   project.remove(req.params.id)
     .then((action) => {
       res.status(200).json({
-        message: "The user has been deleted"
+        message: "The project has been deleted"
       })
         .catch((error) => {
           res.status(404).json({
-            message: "The post with the specified ID does not exist."
+            message: "The project with the specified ID does not exist."
           })
         })
     })
 })
 
 //works
-router.put('/projects/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   project.update(req.params.id, req.body)
     .then((project) => {
       res.status(200).json(project)
@@ -71,5 +72,7 @@ router.put('/projects/:id', (req, res) => {
         })
     })
 })
+
+
 
 module.exports = router;

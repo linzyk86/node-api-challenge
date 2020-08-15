@@ -5,26 +5,15 @@ const action = require("./helpers/actionModel")
 
 
 
-//works
-router.get('/actions', (req, res) => {
-  action.get()
-    .then((action) => {
-      res.status(200).json(action)
-    })
-    .catch((error) => {
-      res.status(500).json({
-            error: "Error"
-        })
-    })
-});
 
 
-//works
+
+//??
 router.post('/:id/actions', (req, res)=>{
-    action.insert({ ...req.body, id: req.params.id })
+    action.insert({ ...req.body, id: req.params.id, project_id: req.params.project_id })
     
-    .then((action)=>{
-        res.status(201).json(action)
+    .then((newaction)=>{
+        res.status(201).json(newaction)
     })
     .catch((error)=>{
         res.status(500).json({
